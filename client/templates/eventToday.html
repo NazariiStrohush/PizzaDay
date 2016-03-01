@@ -1,0 +1,11 @@
+<template name = "eventToday">
+	<div class="jumbotron">
+		{{#if eventInfo}}
+			<h1>{{title}}</h1>
+			<p>{{description}}</p>
+			<p><a class="btn btn-primary btn-lg" role="button">Перейти до замовлення піцци</a></p>
+		{{else}}
+			<h1>Сьогодні немає знижок :(</h1>
+		{{/if}}
+	</div>
+</template>
