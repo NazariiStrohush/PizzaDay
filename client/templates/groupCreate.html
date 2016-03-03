@@ -1,0 +1,42 @@
+<template name = "groupCreate">
+	<div class="page-header">
+	  <h1>Створити нову групу</h1>
+	</div>
+	<form role="form">
+	  <div class="form-group">
+	    <label for="groupLogo">Логотип</label>
+	    <input type="text" class="form-control groupLogo" id="groupLogo" placeholder="Логотип">
+	  </div>
+	  <div class="form-group">
+	    <label for="groupName">Назва групи</label>
+	    <input type="text" class="form-control groupName" id="groupName" placeholder="Назва групи">
+	  </div>
+		 <div class="container">
+		 <div class="col-sm-6">
+			 <div class="panel panel-warning">
+			  <div class="panel-body">
+			    Всі користувачі
+			  </div>
+				{{#each allUsers}}
+					<a href="#" class="list-group-item usersAll">{{services.google.name}}</a>
+				{{/each}}
+		  		<div class="panel-footer">Оберіть користувача для додавання в групу</div>
+			</div>
+		  </div>
+		  <div class="col-sm-6">
+			 <div class="panel panel-success"> 
+			  <div class="panel-body">
+			    Додані користувачі
+			  </div>
+				{{#each addedUsers}}
+					<a href="#" class="list-group-item usersAdded">{{userName}}</a>
+				{{/each}}
+		  		<div class="panel-footer">Оберіть користувача для видалення з групи</div>
+			</div>
+		  </div>
+		  </div>
+	  <div class="form-group">
+	    <button type="submit" class="btn btn-default send">Створити</button>
+	  </div>
+	</form>
+</template>

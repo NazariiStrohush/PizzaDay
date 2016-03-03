@@ -1,0 +1,27 @@
+<template name = "groupMenu">
+	<div class="panel panel-default">
+      <div class="panel-heading">Меню доступне для замовлення в групі</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Назва</th>
+            <th>Вартість</th>
+            <th>Додав</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each menu}}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{cost}}</td>
+            <td>{{userName}}</td>
+          </tr>
+        {{else}}
+        <tr>
+          <h5>В групі відсутнє меню для замовлення</h5>
+        </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+</template>

@@ -7,6 +7,11 @@
 		  <a class="navbar-brand" href="/">Pizza day</a>
 		</div>
 		<div class="collapse navbar-collapse" id="navigation">
+		<ul class="nav navbar-nav">
+		{{#if registered}}
+		<li><a href="{{pathFor 'groupCreate'}}">Створити групу</a></li>
+		{{/if}}
+		</ul>
 		  <ul class="nav navbar-nav navbar-right">
 		    {{> loginButtons}}
 		  </ul>
