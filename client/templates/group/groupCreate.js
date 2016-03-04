@@ -2,7 +2,7 @@ var usersArray = new ReactiveArray([]);
 Template.groupCreate.events({
 	'click .usersAll': function(e){
 		e.preventDefault();
-		userItem = {
+		var userItem = {
 			userId: this._id,
 			userName: this.services.google.name
 		};
@@ -13,7 +13,7 @@ Template.groupCreate.events({
 	},
 	'click .usersAdded': function(e){
 		e.preventDefault();
-		userItem = {
+		var userItem = {
 			userId: this._id,
 			userName: this.userName
 		};

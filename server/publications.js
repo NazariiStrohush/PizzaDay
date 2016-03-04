@@ -11,3 +11,8 @@ Meteor.publish('group', function(id){
 	check(id, String);
 	return Groups.find({_id: id});
 });
+
+Meteor.publish('menu', function(groupId){
+	check(groupId, String);
+	return Menu.find({groupId: groupId}, {sort: {date: -1}});
+});
