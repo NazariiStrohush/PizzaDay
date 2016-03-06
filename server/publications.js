@@ -6,6 +6,11 @@ Meteor.publish('groups', function(){
 	return Groups.find();
 });
 
+Meteor.publish('groupEvents', function(groupId){
+	check(groupId, String);
+	return groupEvents.find({groupId: groupId});
+});
+
 Meteor.publish('group', function(id){
 	//console.log(id);
 	check(id, String);
