@@ -73,8 +73,8 @@ Template.groupMenu.events({
 			function(err, res){
 				if(err)
 					console.log(err);
-				else
-					console.log(res);
+				/*else
+					console.log(res);*/
 			});
 
 /*		$(quantity).prop("disabled", "true");
