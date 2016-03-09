@@ -21,3 +21,13 @@ Meteor.publish('menu', function(groupId){
 	check(groupId, String);
 	return Menu.find({groupId: groupId}, {sort: {date: -1}});
 });
+
+Meteor.publish('orders', function(groupId){
+	check(groupId, String);
+	return Orders.find({groupId: groupId});
+});
+
+Meteor.publish('order', function(groupId){
+	check(groupId, String);
+	return Order.find({groupId: groupId});
+});

@@ -7,6 +7,10 @@
             <th>Назва</th>
             <th>Вартість</th>
             <th>Додав</th>
+            {{#if ifOrdering ../groupInfo.status}}
+            <th>Кількість</th>
+            <th>Дія</th>
+            {{/if}}
           </tr>
         </thead>
         <tbody>
@@ -15,6 +19,10 @@
             <td>{{name}}</td>
             <td>{{cost}}</td>
             <td>{{userName}}</td>
+            {{#if ifOrdering ../groupInfo.status}}
+            <td><input type="number" min = "1" class = "quantity" value="1"></td>
+            <td><button type="button" class="btn btn-info addTocart">Додати</button></td>
+            {{/if}}
           </tr>
         {{else}}
         <tr>
@@ -24,4 +32,7 @@
         </tbody>
       </table>
     </div>
+      {{#if isOrderCart}}
+        <button type="button" class="btn btn-success confirmOrder pull-right">Підтвердити замовлення</button>
+      {{/if}}
 </template>

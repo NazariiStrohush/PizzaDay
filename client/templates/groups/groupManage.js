@@ -24,7 +24,7 @@ Template.groupManage.events({
 			if (_.findWhere(eventMenuItems, eventMenuItem) == null) {
 	    		eventMenuItems.push(eventMenuItem);
 			}
-			console.log(eventMenuItems.array());
+			//console.log(eventMenuItems.array());
 	},
 	'click .saveEvent': function(e){
 		var daysOfWeek = $(e.target).parents().find('.day input:checked').map(function(){
@@ -38,16 +38,45 @@ Template.groupManage.events({
 			menues: eventMenuItems.array()
 		}
 
-		console.log(eventItem);
+		//console.log(eventItem);
 
 	    Meteor.call('addEvent', eventItem, function(err, res){
 	    	if(err)
 	    		console.log(err);
-	    	else
-	    		console.log(res);
+	    	/*else
+	    		console.log(res);*/
 	    })
-	}
+	},
 
+	'click .ordering': function(e){
+			
+			var ordersItem = {
+				groupId: this.groupId,
+			};
+
+			Meteor.call('setStatus', {groupId: this.groupId, status: 1});
+
+			/*Meteor.call('getTodayDiscounts', this.groupId, function(err, res){
+				if(err)
+					console.log(err);
+			});*/
+		    Meteor.call('createOrders', ordersItem, function(err, res){
+		    	if(err)
+		    		console.log(err);
+		    	/*else {
+		    		Meteor.call('setOrderId', {groupId: res.groupId, orderId: res.id});
+		    	}*/
+		    });
+		},
+	'click .notOrdering': function(e){
+		
+		var ordersItem = {
+			groupId: this.groupId,
+		};
+
+		Meteor.call('setStatus', {groupId: this.groupId, status: 0});
+		Meteor.call('setOrderId', {groupId: this.groupId, orderId: ''});
+	}
 });
 Template.groupManage.helpers({
 	getDayName: function(){
@@ -55,5 +84,15 @@ Template.groupManage.helpers({
 			return this.days.reduce(function(conc, curr) {
   				return conc.concat(', ', daysArr[curr]);
 		}, '').substring(1);
-	}
+	},
+	getStatus: function(){
+		var statusArr = ['Неактивна', 'Замовлення', 'Замовлено', 'Доставляється', 'Доставлено'];
+			/*console.log(this.status);
+			console.log(this.groupInfo.status);
+			console.log(this);*/
+			return statusArr[this.groupInfo];
+	},
+	groupOwner: function() {
+    	return this.groupInfo.userId == Meteor.userId();
+  	}
 });
