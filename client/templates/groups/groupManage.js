@@ -19,7 +19,8 @@ Template.groupManage.events({
 	'click .addDiscount': function(e){
 			var eventMenuItem = {
 				groupId: this.groupId,
-				menuId: $(e.target).parents().find('.eventMenuItems').val()
+				menuId: $(e.target).parents().find('.eventMenuItems').val(),
+				menuName: $(e.target).parents().find('.eventMenuItems option:selected').text()
 			};
 			if (_.findWhere(eventMenuItems, eventMenuItem) == null) {
 	    		eventMenuItems.push(eventMenuItem);
@@ -55,17 +56,9 @@ Template.groupManage.events({
 			};
 
 			Meteor.call('setStatus', {groupId: this.groupId, status: 1});
-
-			/*Meteor.call('getTodayDiscounts', this.groupId, function(err, res){
-				if(err)
-					console.log(err);
-			});*/
 		    Meteor.call('createOrders', ordersItem, function(err, res){
 		    	if(err)
 		    		console.log(err);
-		    	/*else {
-		    		Meteor.call('setOrderId', {groupId: res.groupId, orderId: res.id});
-		    	}*/
 		    });
 		},
 	'click .notOrdering': function(e){
@@ -79,23 +72,32 @@ Template.groupManage.events({
 	},
 	'click .delivering': function(e){
 		Meteor.call('calculateSummaryCost', this.groupId);
+	},
+	'click .discountList': function(e){
+		e.preventDefault();
+		var menuItem = {
+			menuId: this._id,
+			menuName: this.menuName
+		};
+		eventMenuItems.splice(eventMenuItems.lastIndexOf(menuItem), 1);
 	}
 });
 Template.groupManage.helpers({
 	getDayName: function(){
 		var daysArr = ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+		//console.log(this);
 			return this.days.reduce(function(conc, curr) {
   				return conc.concat(', ', daysArr[curr]);
 		}, '').substring(1);
 	},
 	getStatus: function(){
-		var statusArr = ['Неактивна', 'Замовлення', 'Замовлено', 'Доставляється', 'Доставлено'];
-			/*console.log(this.status);
-			console.log(this.groupInfo.status);
-			console.log(this);*/
-			return statusArr[this.groupInfo];
+		var statusArr = ['Тільки перегляд', 'Виконуються замовлення', 'Замовлено', 'Доставляється', 'Доставлено'];
+			return statusArr[this.groupInfo().status];
 	},
 	groupOwner: function() {
-    	return this.groupInfo.userId == Meteor.userId();
+    	return this.groupInfo().userId == Meteor.userId();
+  	},
+  	addedEventMenuItems: function(){
+  		return eventMenuItems.list();
   	}
 });

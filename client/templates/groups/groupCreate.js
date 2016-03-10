@@ -40,6 +40,15 @@ Template.groupCreate.events({
 	}
 });
 
+Template.groupCreate.rendered = function(){
+	var userItem = {
+		userId: Meteor.userId(),
+		userName: Meteor.user().profile.name
+	}
+
+	usersArray.push(userItem);
+};
+
 Template.groupCreate.helpers({
 	addedUsers: function(){
 		//console.log(usersArray);

@@ -1,7 +1,5 @@
 <template name = "groupCreate">
-	<div class="page-header">
-	  <h1>Створити нову групу</h1>
-	</div>
+	<h2>Створити нову групу</h2>
 	<form role="form">
 	  <div class="form-group">
 	    <label for="groupLogo">Логотип</label>
@@ -17,9 +15,11 @@
 			  <div class="panel-body">
 			    Всі користувачі
 			  </div>
+			  <div class="nav">
 				{{#each allUsers}}
 					<a href="#" class="list-group-item usersAll">{{services.google.name}}</a>
 				{{/each}}
+			  </div>
 		  		<div class="panel-footer">Оберіть користувача для додавання в групу</div>
 			</div>
 		  </div>
@@ -28,9 +28,11 @@
 			  <div class="panel-body">
 			    Додані користувачі
 			  </div>
+			  <div class="nav">
 				{{#each addedUsers}}
 					<a href="#" class="list-group-item usersAdded">{{userName}}</a>
 				{{/each}}
+				</div>
 		  		<div class="panel-footer">Оберіть користувача для видалення з групи</div>
 			</div>
 		  </div>
