@@ -76,6 +76,9 @@ Template.groupManage.events({
 
 		Meteor.call('setStatus', {groupId: this.groupId, status: 0});
 		Meteor.call('setOrderId', {groupId: this.groupId, orderId: ''});
+	},
+	'click .delivering': function(e){
+		Meteor.call('calculateSummaryCost', this.groupId);
 	}
 });
 Template.groupManage.helpers({
