@@ -94,7 +94,6 @@ Template.groupManage.events({
 			userId: this.userId,
 			userName: this.userName
 		}
-		console.log(userItem);
 		Meteor.call('removeUserFromGroup', userItem, Template.parentData(1).groupId);
 	}
 });

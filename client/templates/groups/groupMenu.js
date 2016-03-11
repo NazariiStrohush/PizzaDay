@@ -89,5 +89,13 @@ Template.groupMenu.events({
 	    			.addClass("addTocart btn-info")
 	    			.removeClass("btn-danger removeCartItem");*/
 		//console.log(userOrder);
+	},
+	'click .removeMenuItem': function(e){
+		Meteor.call('removeMenuItem', this._id, Template.parentData(1).groupId, function(err, res){
+			if(err)
+				console.log(err);
+		});
 	}
+
+
 });
