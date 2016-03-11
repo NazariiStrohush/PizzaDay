@@ -87,8 +87,15 @@ Template.groupManage.events({
 			userId: $(e.target).parents().find('.usersSelect').val(),
 			userName: $(e.target).parents().find('.usersSelect option:selected').text()
 		}
-		console.log(userItem)
 		Meteor.call('addUserToGroup', userItem, this.groupInfo()._id);
+	},
+	'click .removeUser': function(e){
+		var userItem = {
+			userId: this.userId,
+			userName: this.userName
+		}
+		console.log(userItem);
+		Meteor.call('removeUserFromGroup', userItem, Template.parentData(1).groupId);
 	}
 });
 Template.groupManage.helpers({
@@ -100,7 +107,7 @@ Template.groupManage.helpers({
 		}, '').substring(1);
 	},
 	getStatus: function(){
-		var statusArr = ['Тільки перегляд', 'Виконуються замовлення', 'Замовлено', 'Доставляється', 'Доставлено'];
+		var statusArr = ['Не замовляється', 'Виконуються замовлення', 'Замовлено', 'Доставляється', 'Доставлено'];
 			return statusArr[this.groupInfo().status];
 	},
 	groupOwner: function() {
