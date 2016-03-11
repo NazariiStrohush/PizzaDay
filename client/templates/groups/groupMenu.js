@@ -12,6 +12,9 @@ Template.groupMenu.helpers({
 		userOrder.depend();
 		//console.log(userOrder.length);
 		return (userOrder.length > 0) ? true : false;
+	},
+	'isCreator': function(){
+		return (Template.parentData(1).groupInfo().userId == Meteor.userId()) || (this.userId == Meteor.userId());
 	}
 });
 

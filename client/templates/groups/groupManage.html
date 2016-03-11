@@ -6,28 +6,41 @@
 			</div>
 	  		<div class="col-md-7">
 			<h3>Статус групи: <small>{{getStatus}}</small></h3> 
-			  	<div class="btn-group">
+			  	{{#if groupOwner}}<div class="btn-group">
 				  <button type="button" class="btn btn-danger notOrdering">Скасувати оформення замовлень</button>
 				  <button type="button" class="btn btn-info ordering">Відкрити замовлення</button>
 				  <button type="button" class="btn btn-primary delivering">Оформити всі замовлення</button>
 				</div>
+				{{/if}}
 			</div>
   	</div>
 	<div class = "row">
 	  	<div class="col-md-5">
-			<div class="panel panel-default">
-			  <div class="panel-heading">
-			    <h3 class="panel-title">Користувачі в групі</h3>
-			  </div>
-			  <div class="panel-body">
+			<h3>Користувачі в групі</h3>
+	  		<div class="list-group">
 			    <div class="nav">
-					{{#each groupInfo.users}}
-						<a href="#" class="list-group-item ">{{userName}}</a>
-					{{/each}}
-				</div>
-			  </div>
-			</div>
+			    {{#each groupInfo.users}}
+			    <a href="#" class="list-group-item clearfix">
+			      <span class="glyphicon glyphicon-user"></span>
+			      {{userName}}
+			      {{#if groupOwnerP}}<span class="pull-right">
+			        <button class="btn btn-xs btn-warning removeUser">
+			          <span class="glyphicon glyphicon-trash"></span>
+			        </button>
+			      </span>
+			      {{/if}}
+			    </a>
+			    {{/each}}
+		    </div>
+		  </div>
+			{{#if groupOwner}}<select class="form-control usersSelect">
+			  {{#each allUsers}}
+			  	<option value = '{{_id}}'>{{services.google.name}}</option>
+			  {{/each}}
+			</select> <button type="button" class="btn btn-success addUser">Додати користувача</button>
+			{{/if}}
 		</div>
+
 		<div class="col-md-7">
 		<h3>Знижки для групи</h3>
 			<div class="panel-group" id="accordion">
@@ -37,6 +50,13 @@
 				    <div class="panel-heading">
 				      <h4 class="panel-title">
 				              <a data-toggle="collapse" data-parent="#accordion" href="#{{_id}}">
+				              {{#if groupOwnerP}}
+				              	<span class="pull-right">
+						        <button class="btn btn-xs btn-warning removeDiscount">
+						          <span class="glyphicon glyphicon-remove-sign"></span>
+						        </button>
+						      	</span>
+				              {{/if}}
 				                {{name}} <p class="text-right"><i>Дні: <b>{{getDayName}}</b></i></p>
 				              </a>
 				            </h4>
@@ -55,7 +75,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	{{#if groupOwner}}<div class="row">
 		<h3>Додати день знижок</h3>
 		<div class="col-md-4">
 		    <h5>Назва події</h5>
@@ -109,6 +129,7 @@
 			</div>
 		</div>
 	</div>
+	{{/if}}
 	<div class="row">
 		<h3>Додати пункти меню</h3>
 	    	<div class="row">

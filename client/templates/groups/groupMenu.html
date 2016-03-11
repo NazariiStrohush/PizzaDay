@@ -16,12 +16,18 @@
         <tbody>
         {{#each menuItems}}
           <tr>
-            <td>{{name}}</td>
+            <td>
+            {{#if isCreator}}
+              <button class="btn btn-xs btn-warning removeMenuItem">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            {{/if}}
+            {{name}}</td>
             <td>{{cost}}</td>
             <td>{{userName}}</td>
             {{#if ifOrdering ../groupInfo.status}}
-            <td><input type="number" min = "1" class = "quantity" value="1"></td>
-            <td><button type="button" class="btn btn-info addTocart">Додати</button></td>
+              <td><input type="number" min = "1" class = "quantity" value="1"></td>
+              <td><button type="button" class="btn btn-info addTocart">Додати</button></td>
             {{/if}}
           </tr>
         {{else}}

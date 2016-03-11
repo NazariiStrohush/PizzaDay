@@ -80,6 +80,15 @@ Template.groupManage.events({
 			menuName: this.menuName
 		};
 		eventMenuItems.splice(eventMenuItems.lastIndexOf(menuItem), 1);
+	},
+	'click .addUser': function(e){
+		
+		var userItem = {
+			userId: $(e.target).parents().find('.usersSelect').val(),
+			userName: $(e.target).parents().find('.usersSelect option:selected').text()
+		}
+		console.log(userItem)
+		Meteor.call('addUserToGroup', userItem, this.groupInfo()._id);
 	}
 });
 Template.groupManage.helpers({
@@ -96,6 +105,9 @@ Template.groupManage.helpers({
 	},
 	groupOwner: function() {
     	return this.groupInfo().userId == Meteor.userId();
+  	},
+  	groupOwnerP: function() {
+    	return Template.parentData(1).groupInfo().userId == Meteor.userId();
   	},
   	addedEventMenuItems: function(){
   		return eventMenuItems.list();
