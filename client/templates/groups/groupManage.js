@@ -95,7 +95,20 @@ Template.groupManage.events({
 			userName: this.userName
 		}
 		Meteor.call('removeUserFromGroup', userItem, Template.parentData(1).groupId);
-	}
+	},
+	'click .removeDiscount': function(e){
+		var discountItem = {
+			discountId: this._id,
+			groupId: this.groupId
+		};
+
+		console.log(discountItem);
+
+		Meteor.call('removeDiscount', this._id, this.groupId, function(err, res){
+			if(err)
+				console.log(err);
+		});
+	},
 });
 Template.groupManage.helpers({
 	getDayName: function(){
