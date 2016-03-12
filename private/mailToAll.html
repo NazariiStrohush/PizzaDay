@@ -1,0 +1,31 @@
+<template name = "mailToAll">
+	{{userName}}
+
+	{{#each arr}}
+		<div class="panel panel-default">
+	      <div class="panel-heading">Ваші замовлення</div>
+
+	      <table class="table">
+	        <thead>
+	          <tr>
+	            <th>№</th>
+	            <th>Назва</th>
+	            <th>Кількість</th>
+	            <th>Вартість</th>
+	            <th>Зі знижкою</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr>
+	            <td>{{@index}}</td>
+	            <td>{{name}}</td>
+	            <td>{{quantity}}</td>
+	            <td>{{cost}}</td>
+	            <td>{{costWithDiscount}}</td>
+	          </tr>
+	        </tbody>
+	      </table>
+	    </div>
+	{{/each}}
+	<h3> До оплати {{sumWithDiscount}}$</h3>
+</template>

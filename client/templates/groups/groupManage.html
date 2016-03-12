@@ -1,4 +1,5 @@
 <template name = "groupManage">
+	{{#if userInGroup}}
 	<div class = "row">
 			<div class="col-md-5">
 				<h2>{{groupInfo.logo}} {{groupInfo.name}}</h2> 
@@ -10,6 +11,14 @@
 				  <button type="button" class="btn btn-danger notOrdering">Скасувати оформення замовлень</button>
 				  <button type="button" class="btn btn-info ordering">Відкрити замовлення</button>
 				  <button type="button" class="btn btn-primary delivering">Оформити всі замовлення</button>
+				</div>
+				{{/if}}
+				{{#if ifOrdering}}
+				<h5>Виконали замовлення:</h5>
+				<div class="progress">
+				  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{usersPercentOrdered}}" aria-valuemin="0" aria-valuemax="100" style="width: {{usersPercentOrdered}}%;">
+				    {{usersOrdered}}/{{groupUsersCount}}
+				  </div>
 				</div>
 				{{/if}}
 			</div>
@@ -151,4 +160,7 @@
 		<h3>Меню групи</h3> 
 			{{>groupMenu}}
 	</div>
+	{{else}}
+	Ви не є учасником групи :(
+	{{/if}}
 </template>

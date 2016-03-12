@@ -102,7 +102,7 @@ Template.groupManage.events({
 			groupId: this.groupId
 		};
 
-		console.log(discountItem);
+		//console.log(discountItem);
 
 		Meteor.call('removeDiscount', this._id, this.groupId, function(err, res){
 			if(err)
@@ -130,5 +130,24 @@ Template.groupManage.helpers({
   	},
   	addedEventMenuItems: function(){
   		return eventMenuItems.list();
-  	}
+  	},
+  	'ifOrdering': function(){
+		//console.log(status);
+		return (this.groupInfo().status == 1) ? true : false;
+	},
+	'groupUsersCount': function(){
+		return this.groupInfo().users.length;
+	},
+	'usersPercentOrdered': function(){
+		return Orders.findOne({groupId: this.groupId}, {sort: {date: -1, limit: 1}}).usersId.length / this.groupInfo().users.length * 100;
+	},
+	'usersOrdered': function(){
+		return Orders.findOne({groupId: this.groupId}, {sort: {date: -1, limit: 1}}).usersId.length;
+	},
+	'userInGroup': function(){
+		if(_.findWhere(this.groupInfo().users, {userId: Meteor.userId()}))
+			return true;
+		else
+			return false;
+	}
 });
