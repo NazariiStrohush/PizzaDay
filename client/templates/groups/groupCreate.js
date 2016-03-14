@@ -23,7 +23,7 @@ Template.groupCreate.events({
 	'click .send': function(e){
 		e.preventDefault();
 		var groupItem = {
-			logo: $(e.target).parents().find(".groupLogo").val(),
+			logo: /*$(e.target).parents().find(".groupLogo").val(),*/ "logo",
 			name: $(e.target).parents().find(".groupName").val(),
 			users: usersArray.array()
 		}

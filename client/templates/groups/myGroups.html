@@ -1,0 +1,15 @@
+<template name = "myGroupsList">
+<h3>Групи в яких я перебуваю: </h3>
+	<div class="list-group">
+	{{#each myGroups}}	
+		<a href = "/groupManage/{{_id}}" class="list-group-item">
+			<span class="badge">{{users.length}} 
+				<span class="glyphicon glyphicon-user"></span>
+			</span>
+		{{name}} {{#if ifCreator}}
+			<span class="label label-primary pull-right">Засновник</span>
+			{{/if}}
+		</a>
+	{{/each}}
+	</div>
+</template>
