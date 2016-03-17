@@ -59,6 +59,8 @@ Template.groupManage.events({
 		    Meteor.call('createOrders', ordersItem, function(err, res){
 		    	if(err)
 		    		console.log(err);
+		    	/*else
+		    		console.log(res);*/
 		    });
 		},
 	'click .notOrdering': function(e){
